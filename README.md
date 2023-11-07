@@ -7,7 +7,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /root/docker-ik
 ```
 # To start the server
 ```
-cd /root/docker-panel-local
+cd /root/docker-ikeymonitor-server
 docker compose up -d
 ```
 Then access the panel https://yourserver-domain-or-ip
