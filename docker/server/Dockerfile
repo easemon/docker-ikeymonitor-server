@@ -23,6 +23,12 @@ RUN chown -R www-data:www-data /home/panel
 WORKDIR /home/panel
 RUN chmod 777 -R /tmp && chmod o+t -R /tmp
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+# ioncube loader
+RUN curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+    && tar -xvvzf ioncube.tar.gz \
+    && mv ioncube/ioncube_loader_lin_7.4.so `php-config --extension-dir` \
+    && rm -Rf ioncube.tar.gz ioncube \
+    && docker-php-ext-enable ioncube_loader_lin_7.4
 RUN install-php-extensions gd pdo_mysql bcmath zip intl gettext mbstring opcache snmp soap sockets pcntl event posix mysqli calendar zip exif memcache memcached curl json
 RUN apt-get update && apt-get install libevent-dev -y
 RUN usermod -u 99 www-data
