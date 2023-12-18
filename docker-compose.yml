@@ -10,6 +10,9 @@ services:
       dockerfile: ./docker/server/Dockerfile
     container_name: '${APP_NAME}-server'
     restart: always
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
+    entrypoint: /usr/local/bin/entrypoint.sh
     logging:
        driver: "local"
        options:
