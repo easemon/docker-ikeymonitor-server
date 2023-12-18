@@ -12,6 +12,18 @@ RUN a2enmod proxy_wstunnel
 RUN a2enmod ssl headers
 RUN a2enmod deflate
 
+# Copy the entrypoint script into the container
+COPY ./entrypoint.sh /usr/local/bin/
+
+# Copy your Apache configuration file (assuming it's named panel.conf)
+COPY ./docker/server/apache/sites-enabled/panel.conf /etc/apache2/sites-enabled/panel.conf
+
+# Set executable permissions for the entrypoint script
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set the entrypoint script as the entry point to start the container
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 # ffmpeg
 RUN wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && 	tar -xvf ffmpeg-release-amd64-static.tar.xz && 	cp ./ffmpeg*-static/ffmpeg /usr/local/bin/ && 	rm -rf ffmpeg*
 
