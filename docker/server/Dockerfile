@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y wget git unzip zip curl locales
 
@@ -38,9 +38,9 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 # ioncube loader
 RUN curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
     && tar -xvvzf ioncube.tar.gz \
-    && mv ioncube/ioncube_loader_lin_7.4.so `php-config --extension-dir` \
+    && mv ioncube/ioncube_loader_lin_8.2.so `php-config --extension-dir` \
     && rm -Rf ioncube.tar.gz ioncube \
-    && docker-php-ext-enable ioncube_loader_lin_7.4
+    && docker-php-ext-enable ioncube_loader_lin_8.2
 RUN install-php-extensions gd pdo_mysql bcmath zip intl gettext mbstring opcache snmp soap sockets pcntl event posix mysqli calendar zip exif memcache memcached curl json
 RUN apt-get update && apt-get install libevent-dev -y
 RUN usermod -u 99 www-data
