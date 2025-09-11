@@ -25,7 +25,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # ffmpeg
-RUN wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && 	tar -xvf ffmpeg-release-amd64-static.tar.xz && 	cp ./ffmpeg*-static/ffmpeg /usr/local/bin/ && 	rm -rf ffmpeg*
+RUN wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && 	tar -xvf ffmpeg-release-amd64-static.tar.xz && 	cp ./ffmpeg*-static/ffmpeg /usr/local/bin/ && cp ./ffmpeg-*-static/ffprobe /usr/local/bin/ && rm -rf ffmpeg*
 
 
 RUN cp /usr/share/i18n/SUPPORTED /etc/locale.gen
